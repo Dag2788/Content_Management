@@ -14,9 +14,6 @@ class ToDoList extends Component {
       loggedIn: false
     };
 
-    this.facebookSignIn = this.facebookSignIn.bind(this)
-    this.facebookSignOut = this.facebookSignOut.bind(this)
-
   }
 
 
