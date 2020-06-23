@@ -10,25 +10,57 @@ class ToDoList extends Component {
 
     this.state = {
       task: "",
-      items: []
+      items: [],
+      loggedIn: false
     };
+
+    this.facebookSignIn = this.facebookSignIn.bind(this)
+    this.facebookSignOut = this.facebookSignOut.bind(this)
+
   }
 
 
 
   componentDidMount() {
- 
+    window.FB.getLoginStatus(function(response) {
+      if (response.status === "connected"){
+        this.setState({loggedIn : true})
+        console.log("what")
+      }
+  });
     this.getTask();
+    console.log("fuck")
+
   }
 
 
 facebookSignIn = () => {
-
-  window.FB.login(function(response){
-    console.log(response)
+  window.FB.login((response) =>{
+    if (response.status === "connected"){
+      this.setState({loggedIn : true})
+    }
   });
 }
 
+facebookSignOut = () => {
+  window.FB.logout((response) => {
+    if (response.status !== "connected"){
+      this.setState({
+        loggedIn: false
+      });
+    }
+ });
+}
+
+signInsignOut = () => {
+  let { loggedIn } = this.state;
+  if (!loggedIn) {
+    this.facebookSignIn();
+  }
+  else {
+    this.facebookSignOut();
+  }
+}
 
   onChange = event => {
     this.setState({
@@ -152,12 +184,15 @@ facebookSignIn = () => {
       });
   };
   render() {
+   let { loggedIn } = this.state
     return (
       <div>
-      <button onClick={this.facebookSignIn} className="ui facebook button">
+      
+      <button onClick={this.signInsignOut} className="ui facebook button">
         <i className="facebook icon"></i>
-        Log in With Facebook
+        {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
       </button>
+      
         <div className="row">
           <Header className="header" as="h2">
             TO DO LIST
