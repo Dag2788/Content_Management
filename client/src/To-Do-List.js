@@ -14,9 +14,21 @@ class ToDoList extends Component {
     };
   }
 
+
+
   componentDidMount() {
+ 
     this.getTask();
   }
+
+
+facebookSignIn = () => {
+
+  window.FB.login(function(response){
+    console.log(response)
+  });
+}
+
 
   onChange = event => {
     this.setState({
@@ -142,6 +154,10 @@ class ToDoList extends Component {
   render() {
     return (
       <div>
+      <button onClick={this.facebookSignIn} className="ui facebook button">
+        <i className="facebook icon"></i>
+        Log in With Facebook
+      </button>
         <div className="row">
           <Header className="header" as="h2">
             TO DO LIST
@@ -163,7 +179,7 @@ class ToDoList extends Component {
         <div className="row">
           <Card.Group>{this.state.items}</Card.Group>
         </div>
-      </div>
+        </div>
     );
   }
 }
