@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Card, Header, Form, Input, Icon } from "semantic-ui-react";
+import { Card, Header, Icon } from "semantic-ui-react";
 
 import "./index.css";
 
@@ -183,12 +183,12 @@ signInsignOut = () => {
       <div>
           <div className="login">
             <div className="header-login">
-              <Header className="header" as="h1" style={{'font-size': '60px', 'font-family': "Comic Sans MS, Comic Sans, cursive", 'color': '#FFF'}}>
+              <Header className="header" as="h1" style={{'fontSize': '60px', 'fontFamily': "Comic Sans MS, Comic Sans, cursive", 'color': '#FFF'}}>
                 TRENDY
               </Header>
             </div>
             <div className="header-login">
-              <Header className="header" as="h2" style={{'font-size': '35px', 'font-family': "Comic Sans MS, Comic Sans, cursive", 'color': '#e3e3e3'}}>
+              <Header className="header" as="h2" style={{'fontSize': '35px', 'fontFamily': "Comic Sans MS, Comic Sans, cursive", 'color': '#e3e3e3'}}>
                 Let Trendy post for you!
               </Header>
             </div>
