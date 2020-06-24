@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { Card, Header, Icon } from "semantic-ui-react";
 
 import "./index.css";
+import "./mobile.css";
 
 let endpoint = "http://localhost:8080";
 
@@ -190,17 +191,17 @@ signInsignOut = () => {
       <div>
           <div className="login">
             <div className="header-login">
-              <Header className="header" as="h1" style={{'fontSize': '60px', 'fontFamily': "Comic Sans MS, Comic Sans, cursive", 'color': '#FFF'}}>
+              <div className="header">
                 TRENDY
-              </Header>
+              </div>
             </div>
             <div className="header-login">
-              <Header className="header" as="h2" style={{'fontSize': '35px', 'fontFamily': "Comic Sans MS, Comic Sans, cursive", 'color': '#e3e3e3'}}>
+              <div className="subheader">
                 Let Trendy post for you!
-              </Header>
+              </div>
             </div>
             <div className="facebook-login">
-              <button onClick={this.signInsignOut} className="ui facebook button" style={{'width': '400px', 'height': '50px'}}>
+              <button onClick={this.signInsignOut} className="ui facebook button">
                 <i className="facebook icon"></i>
                 {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
               </button>
