@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
 import { Card, Header, Icon } from "semantic-ui-react";
 
 import "./index.css";
@@ -179,7 +180,13 @@ signInsignOut = () => {
   };
   render() {
    let { loggedIn } = this.state
+   if(loggedIn){
+    return <Redirect to='/content' />
+
+   }
     return (
+    <div className="App">
+       <div className="App-content">
       <div>
           <div className="login">
             <div className="header-login">
@@ -214,6 +221,8 @@ signInsignOut = () => {
               <Card.Group>{this.state.items}</Card.Group>
             </div> */}
           </div>
+        </div>
+        </div>
         </div>
     );
   }
