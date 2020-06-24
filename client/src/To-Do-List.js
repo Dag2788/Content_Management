@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card, Header, Form, Input, Icon } from "semantic-ui-react";
+import { Container, Card, Header, Form, Input, Icon } from "semantic-ui-react";
+
+import "./index.css";
 
 let endpoint = "http://localhost:8080";
 
@@ -15,8 +17,6 @@ class ToDoList extends Component {
     };
 
   }
-
-
 
   componentDidMount() {
     window.FB.getLoginStatus(function(response) {
@@ -184,33 +184,39 @@ signInsignOut = () => {
    let { loggedIn } = this.state
     return (
       <div>
-      
-      <button onClick={this.signInsignOut} className="ui facebook button">
-        <i className="facebook icon"></i>
-        {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
-      </button>
-      
-        <div className="row">
-          <Header className="header" as="h2">
-            TO DO LIST
-          </Header>
-        </div>
-        <div className="row">
-          <Form onSubmit={this.onSubmit}>
-            <Input
-              type="text"
-              name="task"
-              onChange={this.onChange}
-              value={this.state.task}
-              fluid
-              placeholder="Create Task"
-            />
-            {/* <Button >Create Task</Button> */}
-          </Form>
-        </div>
-        <div className="row">
-          <Card.Group>{this.state.items}</Card.Group>
-        </div>
+          <div className="login">
+            <div className="header-login">
+              <Header className="header" as="h1" style={{'font-size': '60px', 'font-family': "Comic Sans MS, Comic Sans, cursive", 'color': '#FFF'}}>
+                TRENDY
+              </Header>
+            </div>
+            <div className="header-login">
+              <Header className="header" as="h2" style={{'font-size': '35px', 'font-family': "Comic Sans MS, Comic Sans, cursive", 'color': '#e3e3e3'}}>
+                Let Trendy post for you!
+              </Header>
+            </div>
+            <div className="facebook-login">
+              <button onClick={this.signInsignOut} className="ui facebook button" style={{'width': '400px', 'height': '50px'}}>
+                <i className="facebook icon"></i>
+                {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
+              </button>
+            </div>
+            {/* <div className="tasks">
+              <Form onSubmit={this.onSubmit}>
+                <Input
+                  type="text"
+                  name="task"
+                  onChange={this.onChange}
+                  value={this.state.task}
+                  fluid
+                  placeholder="Create Task"
+                />
+              </Form>
+            </div>
+            <div className="row">
+              <Card.Group>{this.state.items}</Card.Group>
+            </div> */}
+          </div>
         </div>
     );
   }
