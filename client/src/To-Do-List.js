@@ -19,15 +19,12 @@ class ToDoList extends Component {
 
 
   componentDidMount() {
-    window.FB.getLoginStatus(function(response) {
+    window.FB.getLoginStatus((response) => {
       if (response.status === "connected"){
         this.setState({loggedIn : true})
-        console.log("what")
       }
   });
     this.getTask();
-    console.log("fuck")
-
   }
 
 
