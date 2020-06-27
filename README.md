@@ -13,3 +13,7 @@ Start the Server:
 Start the Client:
 1) cd client
 2) npm start
+
+Puppeteer FB post:
+1) In root directory run:
+2) node pups.js 
