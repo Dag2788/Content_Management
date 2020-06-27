@@ -16,4 +16,6 @@ Start the Client:
 
 Puppeteer FB post:
 1) In root directory run:
-2) node pups.js 
+1) npm i puppeteer
+2) npm i axios
+3) node pups.js 
