@@ -1,10 +1,12 @@
 body {
   margin: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -28,6 +30,10 @@ code {
   justify-content: space-around; 
 }
 
+.facebook-logout {
+  margin-top: 20%;
+}
+
 .header {
   font-size: 70px;
   font-family: Comic Sans MS, Comic Sans, cursive;
@@ -44,3 +50,77 @@ code {
   width: 400px;
   height: 50px;
 }
+
+/* CARDS */
+.card {
+  transition: 0.5s;
+  background: #eee;
+  border-radius: 10%;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+
+.card-image { 
+  text-align: center;
+  padding: 50px;
+}
+
+.card h5 {
+  padding: 10px 0px;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* .subscribe_btn {
+  margin: 25px;
+  background: #FFF;
+  border: 1px solid rgb(104, 55, 178) ;
+  color: rgb(104, 55, 178);
+}
+
+.subscribe_btn:hover {
+  transform: scale(1.03);
+  background: rgb(104, 55, 178);
+  border: 1px solid #FFF ;
+  color: #FFF;
+} */
+
+.mediumCard:hover {
+  background: #000000;
+}
+
+.redditCard:hover {
+  background: #ff4301;
+}
+
+.twitchCard:hover {
+  background: #6441a5;
+}
+
+.medium {
+  color: #000000;
+}
+
+.reddit {
+  color: #ff4301;
+}
+
+.twitch {
+  color: #6441a5;
+}
+
+.mediumCard:hover .medium  {
+  color: #FFF;
+}
+
+.redditCard:hover .reddit  {
+  color: #FFF;
+}
+
+.twitchCard:hover .twitch  {
+  color: #FFF;
+}
+

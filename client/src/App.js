@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import ToDoList from "./To-Do-List";
-import LandingPage from "./LandingPage"
+import LandingPage from "./LandingPage";
+
 
 const App = () => {
 

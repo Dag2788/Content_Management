@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
-import { Card, Header, Icon } from "semantic-ui-react";
+import { Card, Icon } from "semantic-ui-react";
 
 import "./index.css";
 import "./mobile.css";
@@ -31,21 +31,26 @@ class ToDoList extends Component {
 
 
 facebookSignIn = () => {
-  window.FB.login((response) =>{
-    if (response.status === "connected"){
-      this.setState({loggedIn : true})
-    }
-  });
+  this.setState({loggedIn : true})
+
+  // window.FB.login((response) =>{
+  //   if (response.status === "connected"){
+  //     this.setState({loggedIn : true})
+  //   }
+  // });
 }
 
 facebookSignOut = () => {
-  window.FB.logout((response) => {
-    if (response.status !== "connected"){
-      this.setState({
-        loggedIn: false
-      });
-    }
- });
+  this.setState({
+    loggedIn: false
+  });
+//   window.FB.logout((response) => {
+//     if (response.status !== "connected"){
+//       this.setState({
+//         loggedIn: false
+//       });
+//     }
+//  });
 }
 
 signInsignOut = () => {
