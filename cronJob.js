@@ -41,8 +41,8 @@ cron.schedule("* * * * *", function() {
     await page.goto('https://facebook.com', {waitUntil: 'networkidle2'});
     
     // Sign in
-    await page.type('input[name=email]', '5126899985', {delay: 20})
-    await page.type('input[name=pass]', '6maiden6', {delay: 20})
+    await page.type('input[name=email]', '<emnail>', {delay: 20})
+    await page.type('input[name=pass]', '<password>', {delay: 20})
     await page.click('input[type=submit]', {waitUntil: 'networkidle2'}); // With type
     await page.waitForNavigation({ waitUntil: 'networkidle0' }),
     
