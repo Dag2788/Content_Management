@@ -16,4 +16,11 @@ Start the Client:
 
 Puppeteer FB post:
 1) In root directory run:
-2) node pups.js 
+1) npm i puppeteer
+2) npm i axios
+3) node pups.js 
+
+Cron Jon running Puppeteer FB post:
+1) In root directory run:
+2) npm install express node-cron
+3) node cronJob.js
