@@ -10,7 +10,7 @@ const App = () => {
     return (
         <Switch>
             <Route path="/" component={ToDoList} exact />
-            <Route path="/content" component={LandingPage} />
+            <Route path="/content/:id" component={LandingPage} />
             <Route component={Error} />
         </Switch>
     );

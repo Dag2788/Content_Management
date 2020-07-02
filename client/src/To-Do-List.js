@@ -21,7 +21,6 @@ class ToDoList extends Component {
       fb_id: "",
       username: "",
       password: "",
-      subscriptions: [],
       isRegistered: false,
       needsAccount: false
     };
@@ -43,13 +42,13 @@ class ToDoList extends Component {
     if (response.status === "connected"){
       console.log(response)
       this.setState({
-        loggedIn : false,
+        loggedIn : true,
         task: "Test Task",
         items: [],
         fb_id: response.authResponse ? response.authResponse.userID : "",
         username: "Dan",
         password: "Test",
-        subscriptions: [],
+        subscriptions: [false, false, false,],
       })
       this.isRegisteredUser()
     }
@@ -116,7 +115,7 @@ signInsignOut = () => {
 
 
   createAccount = () => {
-    let { task, fb_id, username, password } = this.state; 
+    let { task, fb_id, username, password, subscriptions } = this.state; 
     console.log("pRINTING task", this.state.task);
     if (fb_id && username && password) {
       axios
@@ -126,7 +125,8 @@ signInsignOut = () => {
             task,
             fb_id,
             username,
-            password
+            password,
+            subscriptions
           },
           {
             headers: {
@@ -240,7 +240,7 @@ signInsignOut = () => {
   render() {
    let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
    if(isRegistered){
-    return <Redirect to='/content' />
+    return <Redirect to={`/content/${fb_id}`} />
    }
     return (
     <div className="App">

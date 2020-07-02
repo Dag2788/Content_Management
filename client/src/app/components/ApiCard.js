@@ -10,21 +10,21 @@ function ApiCard(props) {
     const coloring = () => setColor(!color);
 
   return (
-    <div class="col s12 m6 l4">
-    <div class={props.class} style={{background: isSubscribedOn ? props.backgroundColor : ''}}>
-    <div class="card-image ">
-      <i class={props.icon} style={{color: isSubscribedOn ? '#FFF' : ''}}></i>
+    <div className="col s12 m6 l4">
+    <div className={props.class} style={{background: isSubscribedOn ? props.backgroundColor : ''}}>
+    <div className="card-image ">
+      <i className={props.icon} style={{color: isSubscribedOn ? '#FFF' : ''}}></i>
     </div>
-    <div class="card-content">
-      <span class="card-title grey-text text-darken-4">
-          <button class="btn waves-effect waves-light btn-large subscribe_btn" style={{background: color ? "rgb(104, 55, 178)" : "", border: color ? "1px solid #FFF" : ""}} type="submit" name="action" 
+    <div className="card-content">
+      <span className="card-title grey-text text-darken-4">
+          <button className="btn waves-effect waves-light btn-large subscribe_btn" style={{background: color ? "rgb(104, 55, 178)" : "", border: color ? "1px solid #FFF" : ""}} type="submit" name="action" 
             onClick={() => { subscribe(); coloring();}}>
             {isSubscribedOn ? 'SUBSCRIBED!' : 'Subscribe'}
           </button>
       </span>
     </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">{props.name}<i class="material-icons right">close</i></span>
+    <div className="card-reveal">
+      <span className="card-title grey-text text-darken-4">{props.name}<i className="material-icons right">close</i></span>
     </div>
   </div>
   </div>

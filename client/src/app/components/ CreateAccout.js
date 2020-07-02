@@ -16,6 +16,16 @@ class CreateAccount extends Component<Props> {
         isRegistered: false,
         username: '',
         password: '',
+        subscriptions: [{
+            name: "MEDIUM",
+            isSubscribed: false
+          },{
+            name: "REDDIT",
+            isSubscribed: false
+          },{
+            name: "TWITCH",
+            isSubscribed: false
+          },]
       }
   
       this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -40,10 +50,10 @@ class CreateAccount extends Component<Props> {
 
 
     createAccount = () => {
-        let { fb_id, username, password } = this.state; 
+        let { fb_id, username, password, subscriptions } = this.state; 
         console.log("Creating user for ", fb_id, " + ", username);
         if (fb_id && username && password) {
-          axios.post(endpoint + "/api/task",{fb_id,username,password},{headers: {"Content-Type": "application/x-www-form-urlencoded"}}).then(res => {
+          axios.post(endpoint + "/api/task",{fb_id,username,password, subscriptions},{headers: {"Content-Type": "application/x-www-form-urlencoded"}}).then(res => {
               this.setState({
                 isRegistered: true
               });
@@ -56,10 +66,10 @@ class CreateAccount extends Component<Props> {
 
 
     render() {
-        let { isRegistered } = this.state
+        let { isRegistered, fb_id } = this.state
         if(isRegistered){
-            return <Redirect to='/content' />
-            }
+            return <Redirect to={`/content/${fb_id}`} />
+        }
         return (
             <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit}>
