@@ -22,11 +22,13 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    // window.FB.getLoginStatus((response) => {
-    //   if (response.status !== "connected"){
-    //     this.setState({loggedIn : false})
-    //   }
-    // });
+    window.FB.getLoginStatus((response) => {
+      if (response.status !== "connected"){
+        this.setState({
+          loggedIn: false,
+        });
+      }
+    });
     this.getSubscriptions();
   }
 
