@@ -73,7 +73,7 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var task models.ToDoList
 	_ = json.NewDecoder(r.Body).Decode(&task)
-	// fmt.Println(task, r.Body)
+	 fmt.Println(task, r.Body)
 	insertOneTask(task)
 	json.NewEncoder(w).Encode(task)
 }
@@ -163,6 +163,45 @@ func insertOneTask(task models.ToDoList) {
 	}
 
 	fmt.Println("Inserted a Single Record ", insertResult.InsertedID)
+}
+
+func CheckAccount(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	params := mux.Vars(r)
+	payload := findFB_Id(params["id"])
+	json.NewEncoder(w).Encode(payload)
+}
+
+
+// Get user FB_ID from DB
+func findFB_Id(fb_id string) []primitive.M {
+	cur, err := collection.Find(context.Background(),bson.M{"fb_id": fb_id})
+
+	if err != nil {
+		fmt.Println("ERRROR!!! ", err)
+
+		log.Fatal(err)
+	}
+
+	var results []primitive.M
+	for cur.Next(context.Background()) {
+		var result bson.M
+		e := cur.Decode(&result)
+		if e != nil {
+			log.Fatal(e)
+		}
+		// fmt.Println("cur..>", cur, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
+		results = append(results, result)
+
+	}
+
+	if err := cur.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	cur.Close(context.Background())
+	return results
 }
 
 // task complete method, update task's status to true

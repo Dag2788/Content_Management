@@ -36,16 +36,13 @@ facebookSignIn = () => {
 }
 
 facebookSignOut = () => {
-  this.setState({
-    loggedIn: false,
-  });
-//   window.FB.logout((response) => {
-//     if (response.status !== "connected"){
-//       this.setState({
-//         loggedIn: false,
-//       });
-//     }
-//  });
+  window.FB.logout((response) => {
+    if (response.status !== "connected"){
+      this.setState({
+        loggedIn: false,
+      });
+    }
+ });
 }
 
 signInsignOut = () => {
