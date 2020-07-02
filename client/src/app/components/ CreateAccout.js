@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
-import { useState } from 'react';
 
 let endpoint = "http://localhost:8080";
 
@@ -44,80 +43,43 @@ class CreateAccount extends Component<Props> {
         let { fb_id, username, password } = this.state; 
         console.log("Creating user for ", fb_id, " + ", username);
         if (fb_id && username && password) {
-          axios
-            .post(
-              endpoint + "/api/task",
-              {
-                fb_id,
-                username,
-                password
-              },
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
-            .then(res => {
+          axios.post(endpoint + "/api/task",{fb_id,username,password},{headers: {"Content-Type": "application/x-www-form-urlencoded"}}).then(res => {
               this.setState({
                 isRegistered: true
               });
               console.log(res);
             }).catch(err => {
               console.log(err);
-    
             });
-    
         }
       };
 
 
-
-  
     render() {
         let { isRegistered } = this.state
         if(isRegistered){
             return <Redirect to='/content' />
-        }
-      return (
-        <div className="row">
-        <form className="col s12" onSubmit={this.handleSubmit}>
-                <div className="row">
-                     <div className="input-field col s12">
-                        <label>Name:</label>
-                        <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
+            }
+        return (
+            <div className="row">
+                <form className="col s12" onSubmit={this.handleSubmit}>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <label>Name:</label>
+                            <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                     <div className="input-field col s12">
-                        <label>Password:</label>
-                        <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
+                    <div className="row">
+                         <div className="input-field col s12">
+                            <label>Password:</label>
+                            <input type="text" value={this.state.password} onChange={this.handleChangePassword} />
+                        </div>
                     </div>
-                </div>
-          {}      
-          <input type="submit" value="Submit" />
-        </form>
-        </div>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
       );
     }
   }
 
 export default CreateAccount;
-
-{/* <div className="row">
-    <div className="col s12">
-        <div className="row">
-            <div className="input-field col s6">
-                <input placeholder="Placeholder" id="username" type="text" className="validate"/>
-                <label username={this.state.username} onChange={this.handleChange} htmlFor="username">Facebook email:</label>
-            </div>
-            <div className="input-field col s6">
-                < input placeholder="Placeholder" id="password" type="text" className="validate"/>
-                < label password={this.state.password} onChange={this.handleChange} htmlFor="password">Facebook password:</label>
-            </div>
-        </div>
-        <div className="row">
-            <button className="btn waves-effect waves-light" type="submit" value="Submit">Submit<i className="material-icons right">send</i></button>
-        </div>
-    </div>
-</div> */}

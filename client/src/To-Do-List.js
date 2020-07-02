@@ -7,7 +7,6 @@ import CreateAccount from "./app/components/ CreateAccout";
 
 import "./index.css";
 import "./mobile.css";
-import { string } from "prop-types";
 
 let endpoint = "http://localhost:8080";
 
@@ -97,7 +96,7 @@ signInsignOut = () => {
             let user = res.data[0];
             if( user.username && user.password){
               this.setState({
-                isRegistered: true
+                isRegistered: true,
               });
             }
           }
@@ -239,7 +238,7 @@ signInsignOut = () => {
       });
   };
   render() {
-   let { loggedIn,  needsAccount, isRegistered, userExist, fb_id } = this.state
+   let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
    if(isRegistered){
     return <Redirect to='/content' />
    }
