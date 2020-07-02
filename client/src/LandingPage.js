@@ -65,6 +65,7 @@ getSubscriptions = () => {
   console.log(this.props)
   let fb_id = this.props.match.params.id
   console.log("Getting subscriptions for user ", fb_id);
+  // fb_id = 10156758433715364
   if (fb_id) {
     axios.get(endpoint + "/api/checkAccount/" + fb_id).then(res => {
         console.log(res);
