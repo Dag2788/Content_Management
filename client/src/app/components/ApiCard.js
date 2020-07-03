@@ -24,7 +24,7 @@ function ApiCard(props) {
     <div className="card-content">
       <span className="card-title grey-text text-darken-4">
           <button className="btn waves-effect waves-light btn-large subscribe_btn" style={{background: color ? "rgb(104, 55, 178)" : "", border: color ? "1px solid #FFF" : ""}} type="submit" name="action" 
-            onClick={() => { subscribe(); coloring(); createAccount(props);}}>
+            onClick={() => { subscribe(); coloring(); createAccount(props, isSubscribedOn);}}>
             {isSubscribedOn ? 'SUBSCRIBED!' : 'Subscribe'}
           </button>
       </span>
@@ -39,13 +39,13 @@ function ApiCard(props) {
   );
 }
 
-function createAccount(props) {
+function createAccount(props, isSubscribedOn) {
   let  fb_id  = props.fb_id;
   let name = props.name
   console.log("Creating user for ", fb_id, " service clicked" + name);
   if (fb_id) {
     axios
-      .put(endpoint + "/api/task/" + fb_id + "/" + name, {
+      .put(endpoint + "/api/task/" + fb_id + "/" + name + "/" + !isSubscribedOn, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
