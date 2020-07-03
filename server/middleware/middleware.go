@@ -87,21 +87,21 @@ func TaskComplete(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	taskComplete(params["id"])
+	taskComplete(params["id"], params["name"])
 	json.NewEncoder(w).Encode(params["id"])
 }
 // UpdateSubscription update task route
-func UpdateSubscription(w http.ResponseWriter, r *http.Request) {
+// func UpdateSubscription(w http.ResponseWriter, r *http.Request) {
 
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "PUT")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+// 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+// 	w.Header().Set("Access-Control-Allow-Methods", "PUT")
+// 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	params := mux.Vars(r)
-	taskComplete(params["id"])
-	json.NewEncoder(w).Encode(params["id"])
-}
+// 	params := mux.Vars(r)
+// 	taskComplete(params["id"])
+// 	json.NewEncoder(w).Encode(params["id"])
+// }
 
 
 
@@ -219,8 +219,8 @@ func findFB_Id(fb_id string) []primitive.M {
 }
 
 // task complete method, update task's status to true
-func taskComplete2(task string) {
-	fmt.Println(task)
+//func taskComplete2(task string) {
+	//fmt.Println(task)
 	//id, _ := primitive.ObjectIDFromHex(task)
 	// filter := bson.M{"fb_id": task}
 	// filter := bson.M{
@@ -234,14 +234,16 @@ func taskComplete2(task string) {
 	//  )
 
 	//fmt.Println("modified count: ", result.ModifiedCount)
-}
+//}
 
 
 // task complete method, update task's status to true
-func taskComplete(task string) {
+func taskComplete(task string, subscribtionName string) {
 	fmt.Println(task)
+	fmt.Println(subscribtionName)
+
 	//id, _ := primitive.ObjectIDFromHex(task)
-	filter := bson.M{"fb_id": task, "subscriptions.name": "MEDIUM" }
+	filter := bson.M{"fb_id": task, "subscriptions.name": subscribtionName }
 	update := bson.M{"$set": bson.M{"subscriptions.$.issubscribed" : true } }
 	result, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {

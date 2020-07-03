@@ -41,10 +41,11 @@ function ApiCard(props) {
 
 function createAccount(props) {
   let  fb_id  = props.fb_id;
-  console.log("Creating user for ", fb_id);
+  let name = props.name
+  console.log("Creating user for ", fb_id, " service clicked" + name);
   if (fb_id) {
     axios
-      .put(endpoint + "/api/task/" + fb_id, {
+      .put(endpoint + "/api/task/" + fb_id + "/" + name, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
