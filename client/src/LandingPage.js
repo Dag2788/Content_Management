@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom'
+import axios from "axios";
 import ApiCollection from "./app/components/ApiCollection";
-
 import "./index.css";
+
+
+let endpoint = "http://localhost:8080";
+
 
 
 class LandingPage extends Component {
@@ -13,16 +17,20 @@ class LandingPage extends Component {
       task: "",
       items: [],
       loggedIn: true,
+      fb_id: this.props.match.params.id
     };
 
   }
 
   componentDidMount() {
-    // window.FB.getLoginStatus((response) => {
-    //   if (response.status !== "connected"){
-    //     this.setState({loggedIn : false})
-    //   }
-    // });
+    window.FB.getLoginStatus((response) => {
+      if (response.status !== "connected"){
+        this.setState({
+          loggedIn: false,
+        });
+      }
+    });
+    this.getSubscriptions();
   }
 
 
@@ -36,16 +44,13 @@ facebookSignIn = () => {
 }
 
 facebookSignOut = () => {
-  this.setState({
-    loggedIn: false,
-  });
-//   window.FB.logout((response) => {
-//     if (response.status !== "connected"){
-//       this.setState({
-//         loggedIn: false,
-//       });
-//     }
-//  });
+  window.FB.logout((response) => {
+    if (response.status !== "connected"){
+      this.setState({
+        loggedIn: false,
+      });
+    }
+ });
 }
 
 signInsignOut = () => {
@@ -57,15 +62,41 @@ signInsignOut = () => {
     this.facebookSignOut();
   }
 }
+
+
+getSubscriptions = () => {
+  console.log(this.props)
+  let fb_id = this.props.match.params.id
+  console.log("Getting subscriptions for user ", fb_id);
+  // fb_id = 10156758433715364
+  if (fb_id) {
+    axios.get(endpoint + "/api/checkAccount/" + fb_id).then(res => {
+        console.log(res);
+        if(res.data){
+          let user = res.data[0];
+          if( user.subscriptions){
+            this.setState({
+              subscriptions: user.subscriptions,
+            });
+          }
+        }
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+
+      })
+  }
+};
+
   render() {
-   let { loggedIn } = this.state
+   let { loggedIn, subscriptions, fb_id } = this.state
     if(!loggedIn){
     return <Redirect to='/' />
     }
     return (
        <div className="App">
         <div className="App-content">
-            <ApiCollection />
+            <ApiCollection subscriptions={subscriptions} fb_id={fb_id}/>
             <div class="row">
               <div className="facebook-logout">
                 <button onClick={this.signInsignOut} className="ui facebook button">
