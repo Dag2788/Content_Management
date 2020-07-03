@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import ToDoList from "./To-Do-List";
+import Trendy from "./Trendy";
 import LandingPage from "./LandingPage";
 
 
@@ -9,7 +9,7 @@ const App = () => {
 
     return (
         <Switch>
-            <Route path="/" component={ToDoList} exact />
+            <Route path="/" component={Trendy} exact />
             <Route path="/content/:id" component={LandingPage} />
             <Route component={Error} />
         </Switch>

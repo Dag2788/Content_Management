@@ -17,6 +17,7 @@ class LandingPage extends Component {
       task: "",
       items: [],
       loggedIn: true,
+      fb_id: this.props.match.params.id
     };
 
   }
@@ -88,14 +89,14 @@ getSubscriptions = () => {
 };
 
   render() {
-   let { loggedIn, subscriptions } = this.state
+   let { loggedIn, subscriptions, fb_id } = this.state
     if(!loggedIn){
     return <Redirect to='/' />
     }
     return (
        <div className="App">
         <div className="App-content">
-            <ApiCollection subscriptions={subscriptions}/>
+            <ApiCollection subscriptions={subscriptions} fb_id={fb_id}/>
             <div class="row">
               <div className="facebook-logout">
                 <button onClick={this.signInsignOut} className="ui facebook button">

@@ -5,14 +5,16 @@ import ApiCard from "./ApiCard";
 let endpoint = "http://localhost:8080";
 
 type Props = {
-  subscriptions: array
+  subscriptions: array,
+  fb_id: string
   };
 
 class ApiCollection extends Component<Props> {
     constructor(props) {
       super(props);
       this.state = {
-        subscriptions: []
+        subscriptions: props.subscriptions,
+        fb_id: props.fb_id
       }
     }
 
@@ -26,14 +28,16 @@ class ApiCollection extends Component<Props> {
 
 
     render() {
-        let { subscriptions } = this.props
+        let { subscriptions, fb_id } = this.props
         console.log(subscriptions)
+        console.log(fb_id)
+
           return (
             <div className="system">
               {subscriptions && <div className="row">
-                    <ApiCard name="MEDIUM" class="card medium mediumCard" icon="massive medium m icon" backgroundColor="#000000" isSelected={subscriptions[0].isSubscribed} />
-                    <ApiCard name="REDDIT" class="card medium redditCard" icon="massive reddit alien icon" backgroundColor="#ff4301" isSelected={subscriptions[1].isSubscribed}/>
-                    <ApiCard name="TWITCH" class="card medium twitchCard" icon="massive twitch icon" backgroundColor="#6441a5" isSelected={subscriptions[2].isSubscribed}/>
+                    <ApiCard name="MEDIUM" class="card medium mediumCard" icon="massive medium m icon" backgroundColor="#000000" isSelected={subscriptions[0].issubscribed} fb_id={fb_id} />
+                    <ApiCard name="REDDIT" class="card medium redditCard" icon="massive reddit alien icon" backgroundColor="#ff4301" isSelected={subscriptions[1].issubscribed} fb_id={fb_id}/>
+                    <ApiCard name="TWITCH" class="card medium twitchCard" icon="massive twitch icon" backgroundColor="#6441a5" isSelected={subscriptions[2].issubscribed} fb_id={fb_id}/>
           </div> }
             </div>
           );

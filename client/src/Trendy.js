@@ -10,7 +10,7 @@ import "./mobile.css";
 
 let endpoint = "http://localhost:8080";
 
-class ToDoList extends Component {
+class Trendy extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +22,7 @@ class ToDoList extends Component {
       username: "",
       password: "",
       isRegistered: false,
-      needsAccount: false
+      needsAccount: false,
     };
 
   }
@@ -53,7 +53,6 @@ class ToDoList extends Component {
       this.isRegisteredUser()
     }
   });
-
 }
 
 facebookSignOut = () => {
@@ -243,9 +242,9 @@ signInsignOut = () => {
     return <Redirect to={`/content/${fb_id}`} />
    }
     return (
-    <div className="App">
+      <div className="App">
        <div className="App-content">
-      <div>
+        <div>
           <div className="login">
             <div className="header-login">
               <div className="header">
@@ -275,4 +274,4 @@ signInsignOut = () => {
   }
 }
 
-export default ToDoList;
+export default Trendy;
