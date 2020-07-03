@@ -47,7 +47,8 @@ function createAccount(props, isSubscribedOn) {
     axios
       .put(endpoint + "/api/task/" + fb_id + "/" + name + "/" + !isSubscribedOn, {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "*"
         }
       })
       .then(res => {

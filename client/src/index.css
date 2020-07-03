@@ -194,6 +194,17 @@ form {
 	text-align: center;
 }
 
+.carlos {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
 input {
 	background-color: #eee;
 	border: none;

@@ -2,18 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
 import { Card, Icon } from "semantic-ui-react";
-import CreateAccount from "./app/components/ CreateAccout";
-
+// import CreateAccount from "./app/components/ CreateAccout";
+import LoginForm from "./app/components/LoginForm";
 
 import "./index.css";
 import "./mobile.css";
-
 let endpoint = "http://localhost:8080";
-
 class Trendy extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       task: "",
       items: [],
@@ -24,9 +21,7 @@ class Trendy extends Component {
       isRegistered: false,
       needsAccount: false,
     };
-
   }
-
   componentDidMount() {
     window.FB.getLoginStatus((response) => {
       if (response.status === "connected"){
@@ -35,8 +30,6 @@ class Trendy extends Component {
   });
    // this.getTask();
   }
-
-
  facebookSignIn = async () => {
   await window.FB.login((response) =>{
     if (response.status === "connected"){
@@ -54,7 +47,6 @@ class Trendy extends Component {
     }
   });
 }
-
 facebookSignOut = () => {
   window.FB.logout((response) => {
     if (response.status !== "connected"){
@@ -64,7 +56,6 @@ facebookSignOut = () => {
     }
  });
 }
-
 signInsignOut = () => {
   let { loggedIn } = this.state;
   if (!loggedIn) {
@@ -74,13 +65,11 @@ signInsignOut = () => {
     this.facebookSignOut();
   }
 }
-
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
-
   isRegisteredUser = () => {
     let { fb_id } = this.state; 
     console.log("pRINTING task", this.state.task);
@@ -106,13 +95,9 @@ signInsignOut = () => {
           console.log(res);
         }).catch(err => {
           console.log(err);
-
         });
-
     }
   };
-
-
   createAccount = () => {
     let { task, fb_id, username, password, subscriptions } = this.state; 
     console.log("pRINTING task", this.state.task);
@@ -141,12 +126,9 @@ signInsignOut = () => {
           console.log(res);
         }).catch(err => {
           console.log(err);
-
         });
-
     }
   };
-
   getTask = () => {
     axios.get(endpoint + "/api/task").then(res => {
       console.log(res);
@@ -154,7 +136,6 @@ signInsignOut = () => {
         this.setState({
           items: res.data.map(item => {
             let color = "yellow";
-
             if (item.status) {
               color = "green";
             }
@@ -164,7 +145,6 @@ signInsignOut = () => {
                   <Card.Header textAlign="left">
                     <div style={{ wordWrap: "break-word" }}>{item.task}</div>
                   </Card.Header>
-
                   <Card.Meta textAlign="right">
                     <Icon
                       name="check circle"
@@ -197,7 +177,6 @@ signInsignOut = () => {
       }
     });
   };
-
   updateTask = id => {
     axios
       .put(endpoint + "/api/task/" + id, {
@@ -210,7 +189,6 @@ signInsignOut = () => {
         this.getTask();
       });
   };
-
   undoTask = id => {
     axios
       .put(endpoint + "/api/undoTask/" + id, {
@@ -223,7 +201,6 @@ signInsignOut = () => {
         this.getTask();
       });
   };
-
   deleteTask = id => {
     axios
       .delete(endpoint + "/api/deleteTask/" + id, {
@@ -237,41 +214,53 @@ signInsignOut = () => {
       });
   };
   render() {
-   let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
-   if(isRegistered){
-    return <Redirect to={`/content/${fb_id}`} />
+    let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
+    if(isRegistered){
+     return <Redirect to={`/content/${fb_id}`} />
+    }
+     return (
+     <div className="App">
+        <div className="App-content">
+             <LoginForm account={needsAccount} login={loggedIn} fb_id={fb_id} />
+         </div>
+         </div>
+     );
    }
-    return (
-      <div className="App">
-       <div className="App-content">
-        <div>
-          <div className="login">
-            <div className="header-login">
-              <div className="header">
-                TRENDY
-              </div>
-            </div>
-            
-           {!needsAccount ? (
-           <div>
-             <div className="header-login">
-              <div className="subheader">
-                Let Trendy post for you!
-              </div>
-            </div>
-            <div className="facebook-login">
-              <button onClick={this.signInsignOut} className="ui facebook button">
-                <i className="facebook icon"></i>
-                {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
-              </button>
-            </div>
-            </div>) : <CreateAccount fb_id={fb_id} /> }
-          </div>
-        </div>
-        </div>
-        </div>
-    );
-  }
+ 
+  // render() {
+  //  let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
+  //  if(isRegistered){
+  //   return <Redirect to={`/content/${fb_id}`} />
+  //  }
+  //   return (
+  //     <div className="App">
+  //      <div className="App-content">
+  //       <div>
+  //         <div className="login">
+  //           <div className="header-login">
+  //             <div className="header">
+  //               TRENDY
+  //             </div>
+  //           </div>
+  //          {!needsAccount ? (
+  //          <div>
+  //            <div className="header-login">
+  //             <div className="subheader">
+  //               Let Trendy post for you!
+  //             </div>
+  //           </div>
+  //           <div className="facebook-login">
+  //             <button onClick={this.signInsignOut} className="ui facebook button">
+  //               <i className="facebook icon"></i>
+  //               {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
+  //             </button>
+  //           </div>
+  //           </div>) : <CreateAccount fb_id={fb_id} /> }
+  //         </div>
+  //       </div>
+  //       </div>
+  //       </div>
+  //   );
+  // }
 }
-
 export default Trendy;

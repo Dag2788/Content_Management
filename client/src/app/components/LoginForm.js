@@ -17,22 +17,36 @@ class LoginForm extends Component<Props> {
       this.state = {
         login: this.props.login,
         account: this.props.account,
-        fb_id: this.props.fb_id
+        fb_id: this.props.fb_id,
+        isRegistered: false,
+        username: '',
+        password: '',
+        subscriptions: [{
+            name: "MEDIUM",
+            isSubscribed: false
+          },{
+            name: "REDDIT",
+            isSubscribed: false
+          },{
+            name: "TWITCH",
+            isSubscribed: false
+          },]
       }
   
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.createAccount = this.createAccount.bind(this);
+        this.handleClick1 = this.handleClick1.bind(this);
     }
 
-    handleClick1() {
+    handleClick1(event) {
+        event.preventDefault();
         if (! this.state.account) {
             document.getElementById('container').classList.add("right-panel-active");
         }
-    }
-
-    handleClick2() {
-        document.getElementById('container').classList.remove("right-panel-active");
+        this.signInsignOut()
+        
     }
   
     handleChangeUsername(event) {
@@ -47,10 +61,10 @@ class LoginForm extends Component<Props> {
   
     handleSubmit(event) {
       event.preventDefault();
-      this.createAccount()
+      this.createAccount();
     }
 
-    createAccount = () => {
+    createAccount() {
         let { fb_id, username, password, subscriptions } = this.state; 
         console.log("Creating user for ", fb_id, " + ", username);
         if (fb_id && username && password) {
@@ -63,35 +77,37 @@ class LoginForm extends Component<Props> {
               console.log(err);
             });
         }
-      };
+    };
     
     render() {
-    let { isRegistered,login, fb_id } = this.state
+    let { isRegistered, login, fb_id } = this.state
     if(isRegistered){
         return <Redirect to={`/content/${fb_id}`} />
     }
-
     return (
             <div class="container" id="container">
                 <div class="form-container sign-up-container">
-                    <form action="#" onSubmit={this.handleSubmit}> 
+                    <form onSubmit={this.handleSubmit}> 
                         <p>To keep connected with us please login with your personal info</p>
                         <input type="text" placeholder="Username" value={this.state.username} onChange={this.handleChangeUsername}/>
                         <input type="text" value={this.state.password} onChange={this.handleChangePassword} placeholder="Password" />
                         <br /><br />
                         <button type="submit" id="signIn">Sign Up</button>
+                        {/* <input type="submit" value="Submit" /> */}
                     </form>
                 </div>
                 <div class="form-container sign-in-container">
-                    <form action="#">
+                    <form onSubmit={this.handleClick1}>
+                    {/* <div class="carlos"> */}
                         <h1>Sign in</h1>
                         <p>By signing up you indicate that you have read and agree to Trendy's Terms of Service and Privacy Policy.</p>
                         <div className="facebook-login">
-                            <button id="signUp" onClick={this.signInsignOut} className="ui facebook button" onClick={() => this.handleClick1()}>
-                            <i className="facebook icon"></i>
-                            {!login ?  "Log in With Facebook" : "Log Out" } 
+                            <button id="signUp" className="ui facebook button">
+                                <i className="facebook icon"></i>
+                                {!login ?  "Log in With Facebook" : "Log Out" } 
                             </button>
                         </div>
+                        {/* </div> */}
                     </form>
                 </div>
                 <div class="overlay-container">
@@ -109,6 +125,67 @@ class LoginForm extends Component<Props> {
             </div>
       );
   }
+
+  facebookSignIn = async () => {
+    await window.FB.login((response) =>{
+      if (response.status === "connected"){
+        console.log(response)
+        this.setState({
+          loggedIn : true,
+          fb_id: response.authResponse ? response.authResponse.userID : "",
+        })
+        this.isRegisteredUser()
+      }
+    });
+  }
+  facebookSignOut = () => {
+    window.FB.logout((response) => {
+      if (response.status !== "connected"){
+        this.setState({
+          loggedIn: false
+        });
+      }
+   });
+  }
+  signInsignOut = () => {
+    let { loggedIn } = this.state;
+    if (!loggedIn) {
+      this.facebookSignIn();
+    }
+    else {
+      this.facebookSignOut();
+    }
+  }
+
+  isRegisteredUser = () => {
+    let { fb_id } = this.state; 
+    console.log("pRINTING task", this.state.task);
+    if(!fb_id){
+      return;
+    }
+    if (fb_id) {
+      axios.get(endpoint + "/api/checkAccount/" + fb_id).then(res => {
+          console.log(res);
+          if(res.data){
+            let user = res.data[0];
+            if( user.username && user.password){
+              this.setState({
+                isRegistered: true,
+              });
+            }
+          }
+          else {
+            this.setState({
+              needsAccount: true
+            });
+          }
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
 }
 
 export default LoginForm;
