@@ -37,10 +37,10 @@ class LoginForm extends Component<Props> {
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.createAccount = this.createAccount.bind(this);
-        this.handleClick1 = this.handleClick1.bind(this);
+        this.openSignUp = this.openSignUp.bind(this);
     }
 
-    handleClick1(event) {
+    openSignUp(event) {
         event.preventDefault();
         if (! this.state.account) {
             document.getElementById('container').classList.add("right-panel-active");
@@ -86,19 +86,17 @@ class LoginForm extends Component<Props> {
     }
     return (
             <div class="container" id="container">
-                <div class="form-container sign-up-container">
+                 <div class="form-container sign-up-container">
                     <form onSubmit={this.handleSubmit}> 
                         <p>To keep connected with us please login with your personal info</p>
                         <input type="text" placeholder="Username" value={this.state.username} onChange={this.handleChangeUsername}/>
                         <input type="text" value={this.state.password} onChange={this.handleChangePassword} placeholder="Password" />
                         <br /><br />
                         <button type="submit" id="signIn">Sign Up</button>
-                        {/* <input type="submit" value="Submit" /> */}
                     </form>
                 </div>
                 <div class="form-container sign-in-container">
-                    <form onSubmit={this.handleClick1}>
-                    {/* <div class="carlos"> */}
+                    <form onSubmit={this.openSignUp}>
                         <h1>Sign in</h1>
                         <p>By signing up you indicate that you have read and agree to Trendy's Terms of Service and Privacy Policy.</p>
                         <div className="facebook-login">
@@ -107,7 +105,6 @@ class LoginForm extends Component<Props> {
                                 {!login ?  "Log in With Facebook" : "Log Out" } 
                             </button>
                         </div>
-                        {/* </div> */}
                     </form>
                 </div>
                 <div class="overlay-container">
@@ -122,7 +119,7 @@ class LoginForm extends Component<Props> {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
       );
   }
 

@@ -6,7 +6,7 @@ import { Card, Icon } from "semantic-ui-react";
 import LoginForm from "./app/components/LoginForm";
 
 import "./index.css";
-import "./mobile.css";
+
 let endpoint = "http://localhost:8080";
 class Trendy extends Component {
   constructor(props) {

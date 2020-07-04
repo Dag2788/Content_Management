@@ -4,10 +4,7 @@ import axios from "axios";
 import ApiCollection from "./app/components/ApiCollection";
 import "./index.css";
 
-
 let endpoint = "http://localhost:8080";
-
-
 
 class LandingPage extends Component {
   constructor(props) {

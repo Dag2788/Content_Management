@@ -34,6 +34,7 @@ class ApiCollection extends Component<Props> {
 
           return (
             <div className="system">
+              <h4 style={{"text-align": "center", "color": 'white', "margin-bottom": "50px"}}>Choose your Trendy content!</h4>
               {subscriptions && <div className="row">
                     <ApiCard name="MEDIUM" class="card medium mediumCard" icon="massive medium m icon" backgroundColor="#000000" isSelected={subscriptions[0].issubscribed} fb_id={fb_id} />
                     <ApiCard name="REDDIT" class="card medium redditCard" icon="massive reddit alien icon" backgroundColor="#ff4301" isSelected={subscriptions[1].issubscribed} fb_id={fb_id}/>

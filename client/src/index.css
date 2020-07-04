@@ -6,7 +6,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background: rgb(104, 55, 178);
 }
 
 code {
@@ -15,14 +18,8 @@ code {
 }
 
 .login {
-  /* width: 620px;
-  height: 550px;
-  display: flex; */
-  /* flex-direction: column; */
   text-align: center;
   justify-content: center;
-  /* border-radius: 30px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .facebook-login { 
@@ -52,14 +49,17 @@ code {
 }
 
 /* CARDS */
-.card {
-  transition: 0.5s;
-  background: #eee;
-  border-radius: 10%;
-  width: 300px;
-  height: 300px;
-  text-align: center;
+@media only screen and (min-width: 700px) {
+	.card {
+		transition: 0.5s;
+		background: #eee;
+		border-radius: 10%;
+		width: 300px;
+		height: 300px;
+		text-align: center;
+	  }
 }
+
 
 .card-image { 
   text-align: center;
@@ -73,20 +73,6 @@ code {
 .card:hover {
   transform: scale(1.03);
 }
-
-/* .subscribe_btn {
-  margin: 25px;
-  background: #FFF;
-  border: 1px solid rgb(104, 55, 178) ;
-  color: rgb(104, 55, 178);
-}
-
-.subscribe_btn:hover {
-  transform: scale(1.03);
-  background: rgb(104, 55, 178);
-  border: 1px solid #FFF ;
-  color: #FFF;
-} */
 
 .mediumCard:hover {
   background: #000000;
@@ -194,35 +180,12 @@ form {
 	text-align: center;
 }
 
-.carlos {
-	background-color: #FFFFFF;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 50px;
-	height: 100%;
-	text-align: center;
-}
-
 input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
-}
-
-.container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
 }
 
 .form-container {
@@ -286,7 +249,7 @@ input {
 .overlay {
 	background: #FF416C;
 	background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -335,42 +298,14 @@ input {
 	transform: translateX(20%);
 }
 
-.social-container {
-	margin: 20px 0;
-}
-
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
+/* .container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+} */
