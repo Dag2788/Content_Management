@@ -7,13 +7,17 @@ let endpoint = "http://localhost:8080";
 
 function ApiCard(props) {
 
-   let  fb_id  = props.fb_id;
-   console.log(fb_id)
-    const [isSubscribedOn, setSubscribe] = useState(false)
-    const subscribe = () => setSubscribe(!isSubscribedOn)
+  let  fb_id  = props.fb_id;
+  let isSelected = props.isSelected;
+  
+  console.log("fb_id: " + fb_id);
+  console.log("isSelected: " + isSelected);
+  
+  const [isSubscribedOn, setSubscribe] = useState(isSelected);
+  const subscribe = () => setSubscribe(!isSubscribedOn);
 
-    const [color, setColor] = useState(false);
-    const coloring = () => setColor(!color);
+  const [color, setColor] = useState(isSelected);
+  const coloring = () => setColor(!color);
 
   return (
     <div className="col s12 m6 l4">
@@ -23,7 +27,10 @@ function ApiCard(props) {
     </div>
     <div className="card-content">
       <span className="card-title grey-text text-darken-4">
-          <button className="btn waves-effect waves-light btn-large subscribe_btn" style={{background: color ? "rgb(104, 55, 178)" : "", border: color ? "1px solid #FFF" : ""}} type="submit" name="action" 
+          <button className="btn waves-effect waves-light btn-large subscribe_btn" 
+            style={{background: color ? "rgb(104, 55, 178)" : "", border: color ? "1px solid #FFF" : ""}} 
+            type="submit" 
+            name="action" 
             onClick={() => { subscribe(); coloring(); createAccount(props, isSubscribedOn);}}>
             {isSubscribedOn ? 'SUBSCRIBED!' : 'Subscribe'}
           </button>
