@@ -94,7 +94,7 @@ getSubscriptions = () => {
        <div className="App">
         <div className="App-content">
             <ApiCollection subscriptions={subscriptions} fb_id={fb_id}/>
-            <div class="row">
+            <div className="row">
               <div className="facebook-logout">
                 <button onClick={this.signInsignOut} className="ui facebook button">
                   <i className="facebook icon"></i>

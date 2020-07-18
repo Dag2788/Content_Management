@@ -85,8 +85,8 @@ class LoginForm extends Component<Props> {
         return <Redirect to={`/content/${fb_id}`} />
     }
     return (
-            <div class="container" id="container">
-                 <div class="form-container sign-up-container">
+            <div className="container" id="container">
+                 <div className="form-container sign-up-container">
                     <form onSubmit={this.handleSubmit}> 
                         <p>To keep connected with us please login with your personal info</p>
                         <input type="text" placeholder="Username" value={this.state.username} onChange={this.handleChangeUsername}/>
@@ -95,7 +95,7 @@ class LoginForm extends Component<Props> {
                         <button type="submit" id="signIn">Sign Up</button>
                     </form>
                 </div>
-                <div class="form-container sign-in-container">
+                <div className="form-container sign-in-container">
                     <form onSubmit={this.openSignUp}>
                         <h1>Sign in</h1>
                         <p>By signing up you indicate that you have read and agree to Trendy's Terms of Service and Privacy Policy.</p>
@@ -107,12 +107,12 @@ class LoginForm extends Component<Props> {
                         </div>
                     </form>
                 </div>
-                <div class="overlay-container">
-                    <div class="overlay">
-                        <div class="overlay-panel overlay-left">
+                <div className="overlay-container">
+                    <div className="overlay">
+                        <div className="overlay-panel overlay-left">
                         <h1>Create Account</h1>
                         </div>
-                        <div class="overlay-panel overlay-right">
+                        <div className="overlay-panel overlay-right">
                             <h1>TRENDY</h1>
                             <br/>
                             <h5>Let Trendy post for you!</h5>

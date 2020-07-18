@@ -87,7 +87,8 @@ func TaskComplete(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	taskComplete(params["id"], params["name"], params["subscribed"])
+	fmt.Println("time: " + params["time"])
+	taskComplete(params["id"], params["name"], params["subscribed"], params["time"])
 	json.NewEncoder(w).Encode(params["id"])
 }
 // UpdateSubscription update task route
@@ -238,20 +239,29 @@ func findFB_Id(fb_id string) []primitive.M {
 
 
 // task complete method, update task's status to true
-func taskComplete(task string, subscribtionName string, subscribed string) {
+func taskComplete(task string, subscribtionName string, subscribed string, time string) {
 	fmt.Println(task)
 	fmt.Println(subscribtionName)
 	fmt.Println(subscribed)
+	fmt.Println(time)
 
 	//id, _ := primitive.ObjectIDFromHex(task)
-	filter := bson.M{"fb_id": task, "subscriptions.name": subscribtionName }
+	filter := bson.M{"fb_id": task, "subscriptions.name": subscribtionName}
 	var update bson.M
+	var updateTime bson.M
 	if(subscribed == "true"){
-		update = bson.M{"$set": bson.M{"subscriptions.$.issubscribed" : true } }
+		update = bson.M{"$set": bson.M{"subscriptions.$.issubscribed" : true }}
 	} else{
 		update = bson.M{"$set": bson.M{"subscriptions.$.issubscribed" : false } }
 	}
 	result, err := collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		updateTime = bson.M{"$set": bson.M{"subscriptions.$.time" : time } }
+		result, err = collection.UpdateOne(context.Background(), filter, updateTime)
+	}
+
 	if err != nil {
 		log.Fatal(err)
 	}

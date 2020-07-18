@@ -226,41 +226,5 @@ signInsignOut = () => {
          </div>
      );
    }
- 
-  // render() {
-  //  let { loggedIn,  needsAccount, isRegistered, fb_id } = this.state
-  //  if(isRegistered){
-  //   return <Redirect to={`/content/${fb_id}`} />
-  //  }
-  //   return (
-  //     <div className="App">
-  //      <div className="App-content">
-  //       <div>
-  //         <div className="login">
-  //           <div className="header-login">
-  //             <div className="header">
-  //               TRENDY
-  //             </div>
-  //           </div>
-  //          {!needsAccount ? (
-  //          <div>
-  //            <div className="header-login">
-  //             <div className="subheader">
-  //               Let Trendy post for you!
-  //             </div>
-  //           </div>
-  //           <div className="facebook-login">
-  //             <button onClick={this.signInsignOut} className="ui facebook button">
-  //               <i className="facebook icon"></i>
-  //               {!loggedIn ?  "Log in With Facebook" : "Log Out" } 
-  //             </button>
-  //           </div>
-  //           </div>) : <CreateAccount fb_id={fb_id} /> }
-  //         </div>
-  //       </div>
-  //       </div>
-  //       </div>
-  //   );
-  // }
 }
 export default Trendy;

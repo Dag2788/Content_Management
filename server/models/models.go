@@ -18,4 +18,5 @@ type subscriptions struct {
 	IsSubscribed 	bool `json:"isSubscribed,omitempty"`
 	NewPost			string `json:"newPost,omitempty"`
 	OldPost			string `json:"oldPost,omitempty"`
+	Time			string `json:"time,omitempty`
 }
